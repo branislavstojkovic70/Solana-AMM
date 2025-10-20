@@ -4,4 +4,6 @@ use anchor_lang::prelude::*;
 pub enum Errors {
     #[msg("Invalid fee value")]
     InvalidFee,
+    #[msg("Invalid mint accounts")]
+    InvalidMint,
 }
