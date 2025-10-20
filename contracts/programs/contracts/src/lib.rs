@@ -11,8 +11,13 @@ declare_id!("GzsQY3iNTX8eJGCyrD45ATKxZJUJLQmespEDubJN2teE");
 pub mod contracts {
     use super::*;
     pub fn create_amm(ctx: Context<CreateAmm>, id: Pubkey, fee: u16) -> Result<()> {
-    ctx.accounts.create_amm(id, fee)?;
-    Ok(())
+        ctx.accounts.create_amm(id, fee)?;
+        Ok(())
+    }
+
+    pub fn create_pool(ctx: Context<CreatePool>) -> Result<()> {
+        ctx.accounts.create_pool()?;
+        Ok(())
     }
    
 }
