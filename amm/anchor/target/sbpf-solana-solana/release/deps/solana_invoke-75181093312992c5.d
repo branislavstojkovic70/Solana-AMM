@@ -1,0 +1,9 @@
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/libsolana_invoke-75181093312992c5.rmeta: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/../README.md
+
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/libsolana_invoke-75181093312992c5.rlib: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/../README.md
+
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/solana_invoke-75181093312992c5.d: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/../README.md
+
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/lib.rs:
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs:
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-invoke-0.4.0/src/../README.md:

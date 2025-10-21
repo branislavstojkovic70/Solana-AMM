@@ -1,0 +1,10 @@
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/liblog-f647e6125462df1b.rmeta: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/macros.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/serde.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/__private_api.rs
+
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/liblog-f647e6125462df1b.rlib: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/macros.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/serde.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/__private_api.rs
+
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/log-f647e6125462df1b.d: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/macros.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/serde.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/__private_api.rs
+
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/lib.rs:
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/macros.rs:
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/serde.rs:
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.28/src/__private_api.rs:

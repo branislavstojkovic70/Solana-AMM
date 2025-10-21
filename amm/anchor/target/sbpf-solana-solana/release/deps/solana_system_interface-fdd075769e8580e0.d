@@ -1,0 +1,9 @@
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/libsolana_system_interface-fdd075769e8580e0.rmeta: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/error.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/instruction.rs
+
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/libsolana_system_interface-fdd075769e8580e0.rlib: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/error.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/instruction.rs
+
+/Users/branislavstojkovic/Documents/GitHub/Solana-AMM/amm/anchor/target/sbpf-solana-solana/release/deps/solana_system_interface-fdd075769e8580e0.d: /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/lib.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/error.rs /Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/instruction.rs
+
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/lib.rs:
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/error.rs:
+/Users/branislavstojkovic/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-system-interface-1.0.0/src/instruction.rs:
