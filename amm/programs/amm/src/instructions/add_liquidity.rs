@@ -71,7 +71,6 @@ pub fn add_liquidity_handler(
     require!(lp_tokens >= min_lp_tokens, ErrorCode::InsufficientLPTokens);
     require!(lp_tokens > 0, ErrorCode::InsufficientLPTokens);
     
-    // Transfer tokens from user to vaults
     transfer_tokens(
         &ctx.accounts.user_token_a,
         &ctx.accounts.vault_a,
@@ -151,7 +150,7 @@ pub struct AddLiquidity<'info> {
         seeds = [b"pool_state", pool_state.token_mint_a.as_ref(), pool_state.token_mint_b.as_ref()],
         bump = pool_state.bump,
     )]
-    pub pool_state: Box<Account<'info, PoolState>>,  // ✅ BOX
+    pub pool_state: Box<Account<'info, PoolState>>,  
     
     /// CHECK: PDA authority derived from pool_state, used as signer for vault operations
     #[account(
@@ -161,10 +160,10 @@ pub struct AddLiquidity<'info> {
     pub pool_authority: AccountInfo<'info>,
     
     #[account(mint::token_program = token_program)]
-    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  
     
     #[account(mint::token_program = token_program)]
-    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  
     
     #[account(
         mut,
@@ -172,7 +171,7 @@ pub struct AddLiquidity<'info> {
         token::mint = token_mint_a,
         token::authority = pool_authority,
     )]
-    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
@@ -180,7 +179,7 @@ pub struct AddLiquidity<'info> {
         token::mint = token_mint_b,
         token::authority = pool_authority,
     )]
-    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
@@ -188,21 +187,21 @@ pub struct AddLiquidity<'info> {
         seeds = [b"pool_mint", pool_state.key().as_ref()],
         bump = pool_state.pool_mint_bump,
     )]
-    pub pool_mint: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub pool_mint: Box<InterfaceAccount<'info, Mint>>,  
     
     #[account(
         mut,
         associated_token::mint = token_mint_a,
         associated_token::authority = user,
     )]
-    pub user_token_a: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_token_a: Box<InterfaceAccount<'info, TokenAccount>>, 
     
     #[account(
         mut,
         associated_token::mint = token_mint_b,
         associated_token::authority = user,
     )]
-    pub user_token_b: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_token_b: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         init_if_needed,
@@ -210,7 +209,7 @@ pub struct AddLiquidity<'info> {
         associated_token::mint = pool_mint,
         associated_token::authority = user,
     )]
-    pub user_lp_token: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_lp_token: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     pub token_program: Interface<'info, TokenInterface>,
     pub associated_token_program: Program<'info, AssociatedToken>,

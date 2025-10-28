@@ -22,8 +22,6 @@ export const useProgram = () => {
       setProvider(provider);
 
       program = new Program(IDL as Amm, provider);
-    } else {
-      
     }
 
     

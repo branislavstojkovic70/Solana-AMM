@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
-import { SwapHoriz, Waves, Add } from "@mui/icons-material";
+import { SwapHoriz, Waves, Add, Remove } from "@mui/icons-material";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useTheme } from "@mui/material/styles";
@@ -158,7 +158,28 @@ export default function Navbar() {
                 },
               }}
             >
-              Liquidity
+              Add Liquidity
+            </Button>
+
+            <Button
+              onClick={() => navigate("/liquidity/remove")}
+              startIcon={<Remove />}
+              sx={{
+                textTransform: "none",
+                color: theme.palette.primary.contrastText,
+                fontSize: "16px",
+                fontWeight: 500,
+                px: 2,
+                py: 1,
+                borderRadius: "8px",
+                transition: "all 0.2s",
+                "&:hover": {
+                  backgroundColor: theme.palette.action.hover,
+                  transform: "translateY(-2px)",
+                },
+              }}
+            >
+              Remove Liquidity
             </Button>
           </Box>
 

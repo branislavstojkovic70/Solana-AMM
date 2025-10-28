@@ -52,14 +52,14 @@ describe("AMM", () => {
   }
 
   it("Setup: Create test accounts and fund them", async () => {
-    console.log("\n🚀 Setting up test environment...");
+    console.log("\n Setting up test environment...");
 
     admin = Keypair.generate();
     user1 = Keypair.generate();
     user2 = Keypair.generate();
     user3 = Keypair.generate();
 
-    console.log("💰 Airdropping SOL...");
+    console.log(" Airdropping SOL...");
     const sig1 = await connection.requestAirdrop(admin.publicKey, 10 * LAMPORTS_PER_SOL);
     await confirmTx(sig1);
 
@@ -194,7 +194,8 @@ describe("AMM", () => {
     console.log("\n Testing high fee rejection...");
 
     const highFee = new BN(11);
-
+    console.log(highFee.toString());
+    console.log(FEE_DENOMINATOR.toString());
     try {
       await program.methods
         .initializePool(highFee, FEE_DENOMINATOR)
@@ -235,6 +236,7 @@ describe("AMM", () => {
           payer: admin.publicKey,
           tokenMintA,
           tokenMintB,
+          //@ts-ignore
           poolState: poolStatePDA,
           poolAuthority: poolAuthorityPDA,
           poolMint: poolMintPDA,

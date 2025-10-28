@@ -16,6 +16,7 @@ import AddLiquidity from "./components/add-liquidity.tsx";
 import RemoveLiquidity from "./components/remove-liquidity.tsx";
 import Swap from "./components/swap.tsx";
 import Pools from "./components/pools.tsx";
+import HomePage from "./components/home.tsx";
 
 const theme = createTheme({
   palette: {
@@ -57,7 +58,6 @@ const theme = createTheme({
 
 const RPC_ENDPOINT = "http://127.0.0.1:8899";
 
-// ✅ Router setup
 
 const router = createBrowserRouter([
   {
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <div>Home Page</div>,
+        element: <HomePage/>,
       },
       {
         path: "create-pool",
@@ -92,7 +92,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-// ✅ App Wrapper sa Wallet Provider
 function App() {
   const wallets = useMemo(
     () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],

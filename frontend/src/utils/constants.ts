@@ -46,14 +46,14 @@ export const TOKEN_LIST: Token[] = [
   {
     symbol: "TEST-A",
     name: "Test Token A",
-    mint: "YOUR_TEST_TOKEN_A_MINT",
+    mint: "FGpUWnFn3Dhgv1CXoBEamh3pyrhJYLu37hsRMPBqnxfB",
     decimals: 9,
     logo: "/logo.png",
   },
   {
     symbol: "TEST-B",
     name: "Test Token B",
-    mint: "YOUR_TEST_TOKEN_B_MINT",
+    mint: "EKjLDQS1LMJK4436BDUWRfGABKrzoDJgc5HnrNcht1qK",
     decimals: 9,
     logo: "/logo.png",
   },

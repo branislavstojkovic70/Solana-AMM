@@ -210,7 +210,7 @@ pub struct Swap<'info> {
         seeds = [b"pool_state", pool_state.token_mint_a.as_ref(), pool_state.token_mint_b.as_ref()],
         bump = pool_state.bump,
     )]
-    pub pool_state: Box<Account<'info, PoolState>>,  // ✅ BOX
+    pub pool_state: Box<Account<'info, PoolState>>,  
     
     /// CHECK: PDA authority
     #[account(
@@ -219,8 +219,8 @@ pub struct Swap<'info> {
     )]
     pub pool_authority: AccountInfo<'info>,
     
-    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
-    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  
+    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  
     
     #[account(
         mut,
@@ -228,7 +228,7 @@ pub struct Swap<'info> {
         token::mint = token_mint_a,
         token::authority = pool_authority,
     )]
-    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
@@ -236,21 +236,21 @@ pub struct Swap<'info> {
         token::mint = token_mint_b,
         token::authority = pool_authority,
     )]
-    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
         token::mint = token_mint_a,
         token::authority = user,
     )]
-    pub user_token_a: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_token_a: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
         token::mint = token_mint_b,
         token::authority = user,
     )]
-    pub user_token_b: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_token_b: Box<InterfaceAccount<'info, TokenAccount>>, 
     
     pub token_program: Interface<'info, TokenInterface>,
 }

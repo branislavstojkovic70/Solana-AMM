@@ -3,8 +3,8 @@ import { getAssociatedTokenAddress, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Program, AnchorProvider, type Idl, BN } from "@coral-xyz/anchor";
 import { PROGRAM_ID, ASSOCIATED_TOKEN_PROGRAM_ID } from "../utils/constants";
 import IDL from "../utils/idl.json";
+import type { Amm } from "../utils/idltype";
 
-// ==================== INTERFACES ====================
 
 export interface PoolInfo {
   address: PublicKey;
@@ -38,10 +38,9 @@ export interface TokenBalance {
   decimals: number;
 }
 
-// ==================== CONTRACT SERVICE ====================
 
 export class ContractService {
-  private program: Program<Idl> | null = null;
+  private program: Program<Amm> | null = null;
   private connection: Connection;
   private wallet: any;
 
@@ -51,13 +50,22 @@ export class ContractService {
   }
 
 
-  private getProgram(): Program<Idl> {
+  private getProgram(): Program<Amm> {
     if (!this.program) {
-      const provider = new AnchorProvider(this.connection, this.wallet, {
-        commitment: "confirmed",
-      });
-      //@ts-ignore
-      this.program = new Program(IDL as Idl, PROGRAM_ID, provider);
+      if (!this.wallet.publicKey) {
+        throw new Error("Wallet not connected");
+      }
+
+      const provider = new AnchorProvider(
+        this.connection,
+        this.wallet as any,
+        { commitment: "confirmed" }
+      );
+
+      this.program = new Program<Amm>(
+        IDL as Amm,
+        provider
+      );
     }
     return this.program;
   }
@@ -128,6 +136,7 @@ export class ContractService {
         payer: this.wallet.publicKey,
         tokenMintA: mintA,
         tokenMintB: mintB,
+
         poolState: poolStatePDA,
         poolAuthority: poolAuthorityPDA,
         poolMint: poolMintPDA,
@@ -142,7 +151,7 @@ export class ContractService {
     return tx;
   }
 
- 
+
   async getPool(tokenMintA: PublicKey, tokenMintB: PublicKey): Promise<PoolInfo | null> {
     try {
       const program = this.getProgram();
@@ -291,7 +300,7 @@ export class ContractService {
     let actualAmountB = amountB;
 
     if (totalSupply === BigInt(0)) {
-      const lpTokens = this.sqrt(amountA * amountB) - BigInt(1000); 
+      const lpTokens = this.sqrt(amountA * amountB) - BigInt(1000);
       return {
         amountA: actualAmountA,
         amountB: actualAmountB,
@@ -309,12 +318,10 @@ export class ContractService {
       actualAmountA = amountAOptimal;
     }
 
-    // Calculate LP tokens
     const lpFromA = (actualAmountA * totalSupply) / reserveA;
     const lpFromB = (actualAmountB * totalSupply) / reserveB;
     const lpTokens = lpFromA < lpFromB ? lpFromA : lpFromB;
 
-    // Calculate share of pool
     const shareOfPool = Number((lpTokens * BigInt(10000)) / (totalSupply + lpTokens)) / 100;
 
     return {
@@ -325,9 +332,6 @@ export class ContractService {
     };
   }
 
-  /**
-   * Add liquidity to pool
-   */
   async addLiquidity(
     tokenMintA: PublicKey,
     tokenMintB: PublicKey,
@@ -577,9 +581,6 @@ export class ContractService {
     return pool !== null;
   }
 
-  /**
-   * Get pool price
-   */
   async getPoolPrice(tokenMintA: PublicKey, tokenMintB: PublicKey): Promise<number | null> {
     const pool = await this.getPool(tokenMintA, tokenMintB);
     if (!pool) return null;

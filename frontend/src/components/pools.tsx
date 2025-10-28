@@ -17,7 +17,6 @@ import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useConnection } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
 import {
   Add,
   Remove,
@@ -63,89 +62,101 @@ export default function Pools() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Get token by mint
-  const getTokenByMint = (mint: string) => {
-    return TOKEN_LIST.find((t) => t.mint === mint);
-  };
-
-  // Fetch all pools
   const fetchAllPools = async () => {
+    if (!wallet.publicKey) {
+      setError("Please connect your wallet");
+      return;
+    }
+
     try {
       setLoading(true);
       setError("");
 
+      console.log("🔍 Fetching all pools...");
+
       const contractService = new ContractService(connection, wallet);
+
+      const poolDataList = await contractService.getAllPools();
+
+      console.log("Found pools:", poolDataList.length);
+
+      if (poolDataList.length === 0) {
+        setError("No pools found. Create one to get started!");
+        setPools([]);
+        return;
+      }
+
       const allPools: Pool[] = [];
 
-      // Check all possible token pairs
-      for (let i = 0; i < TOKEN_LIST.length; i++) {
-        for (let j = i + 1; j < TOKEN_LIST.length; j++) {
-          const tokenA = TOKEN_LIST[i];
-          const tokenB = TOKEN_LIST[j];
+      for (const poolData of poolDataList) {
+        try {
+          const tokenAInfo = TOKEN_LIST.find(
+            (t) => t.mint === poolData.tokenMintA.toString()
+          );
+          const tokenBInfo = TOKEN_LIST.find(
+            (t) => t.mint === poolData.tokenMintB.toString()
+          );
 
-          try {
-            const mintA = new PublicKey(tokenA.mint);
-            const mintB = new PublicKey(tokenB.mint);
+          const tokenA = tokenAInfo || {
+            mint: poolData.tokenMintA.toString(),
+            symbol: poolData.tokenMintA.toString().slice(0, 4),
+            logo: "",
+            decimals: 9,
+          };
 
-            const poolData = await contractService.getPool(mintA, mintB);
+          const tokenB = tokenBInfo || {
+            mint: poolData.tokenMintB.toString(),
+            symbol: poolData.tokenMintB.toString().slice(0, 4),
+            logo: "",
+            decimals: 9,
+          };
 
-            if (poolData) {
-              // Get LP balance if wallet is connected
-              let lpBalance = "0";
-              let shareOfPool = "0";
+          // Dobavi LP balance za wallet
+          let lpBalance = "0";
+          let shareOfPool = "0";
 
-              if (wallet.publicKey) {
-                try {
-                  const balance = await contractService.getLPTokenBalance(mintA, mintB);
-                  lpBalance = (Number(balance) / 1e9).toFixed(6);
+          if (wallet.publicKey) {
+            try {
+              const balance = await contractService.getLPTokenBalance(
+                poolData.tokenMintA,
+                poolData.tokenMintB
+              );
+              lpBalance = (Number(balance) / 1e9).toFixed(6);
 
-                  if (Number(balance) > 0 && poolData.totalSupply > 0) {
-                    shareOfPool = ((Number(balance) / Number(poolData.totalSupply)) * 100).toFixed(4);
-                  }
-                } catch (err) {
-                  console.error("Error fetching LP balance:", err);
-                }
+              if (Number(balance) > 0 && poolData.totalSupply > 0n) {
+                shareOfPool = (
+                  (Number(balance) / Number(poolData.totalSupply)) * 100
+                ).toFixed(4);
               }
-
-              allPools.push({
-                //@ts-ignore
-                address: poolData.address,
-                tokenA: {
-                  mint: tokenA.mint,
-                  symbol: tokenA.symbol,
-                  logo: tokenA.logo,
-                  decimals: tokenA.decimals,
-                },
-                tokenB: {
-                  mint: tokenB.mint,
-                  symbol: tokenB.symbol,
-                  logo: tokenB.logo,
-                  decimals: tokenB.decimals,
-                },
-                reserveA: poolData.reserveA,
-                reserveB: poolData.reserveB,
-                totalSupply: poolData.totalSupply,
-                feeNumerator: poolData.feeNumerator,
-                feeDenominator: poolData.feeDenominator,
-                lpBalance,
-                shareOfPool,
-              });
+            } catch (err) {
+              console.error("Error fetching LP balance:", err);
             }
-          } catch (err) {
-            // Pool doesn't exist, skip
-            console.log(`No pool for ${tokenA.symbol}-${tokenB.symbol}`);
           }
+
+          allPools.push({
+            address: poolData.address.toString(),
+            tokenA,
+            tokenB,
+            reserveA: poolData.reserveA,
+            reserveB: poolData.reserveB,
+            totalSupply: poolData.totalSupply,
+            feeNumerator: poolData.feeNumerator,
+            feeDenominator: poolData.feeDenominator,
+            lpBalance,
+            shareOfPool,
+          });
+        } catch (err) {
+          console.error("Error processing pool:", poolData.address.toString(), err);
         }
       }
 
+      console.log("✅ Processed pools:", allPools.length);
       setPools(allPools);
 
-      if (allPools.length === 0) {
-        setError("No pools found");
-      }
     } catch (err: any) {
-      console.error("Error fetching pools:", err);
-      setError("Failed to load pools");
+      console.error("❌ Error fetching pools:", err);
+      setError(err.message || "Failed to fetch pools");
+      setPools([]);
     } finally {
       setLoading(false);
     }
@@ -331,7 +342,6 @@ export default function Pools() {
   );
 }
 
-// Pool Card Component
 function PoolCard({ pool, theme, navigate }: { pool: Pool; theme: any; navigate: any }) {
   const reserveA = (Number(pool.reserveA) / Math.pow(10, pool.tokenA.decimals)).toFixed(2);
   const reserveB = (Number(pool.reserveB) / Math.pow(10, pool.tokenB.decimals)).toFixed(2);

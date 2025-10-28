@@ -24,7 +24,7 @@ pub fn remove_liquidity_handler(
     );
     
     require!(
-        pool_state.total_supply >= lp_tokens_to_burn,
+        pool_state.total_supply >= lp_tokens_to_burn + 1000,
         ErrorCode::InsufficientLPTokens
     );
     
@@ -136,7 +136,7 @@ pub struct RemoveLiquidity<'info> {
         ],
         bump = pool_state.bump,
     )]
-    pub pool_state: Box<Account<'info, PoolState>>,  // ✅ BOX
+    pub pool_state: Box<Account<'info, PoolState>>,  
     
     /// CHECK: PDA authority
     #[account(
@@ -145,8 +145,8 @@ pub struct RemoveLiquidity<'info> {
     )]
     pub pool_authority: AccountInfo<'info>,
     
-    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
-    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  
+    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  
     
     #[account(
         mut,
@@ -154,7 +154,7 @@ pub struct RemoveLiquidity<'info> {
         token::mint = token_mint_a,
         token::authority = pool_authority,
     )]
-    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
@@ -162,35 +162,35 @@ pub struct RemoveLiquidity<'info> {
         token::mint = token_mint_b,
         token::authority = pool_authority,
     )]
-    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
         address = pool_state.pool_mint,
         mint::authority = pool_authority,
     )]
-    pub pool_mint: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub pool_mint: Box<InterfaceAccount<'info, Mint>>,  
     
     #[account(
         mut,
         associated_token::mint = token_mint_a,
         associated_token::authority = user,
     )]
-    pub user_token_a: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_token_a: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
         associated_token::mint = token_mint_b,
         associated_token::authority = user,
     )]
-    pub user_token_b: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_token_b: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     #[account(
         mut,
         associated_token::mint = pool_mint,
         associated_token::authority = user,
     )]
-    pub user_lp_token: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub user_lp_token: Box<InterfaceAccount<'info, TokenAccount>>,  
     
     pub token_program: Interface<'info, TokenInterface>,
     pub associated_token_program: Program<'info, AssociatedToken>,

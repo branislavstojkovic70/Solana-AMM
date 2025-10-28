@@ -83,10 +83,10 @@ pub struct InitializePool<'info> {
     pub payer: Signer<'info>,
     
     #[account(mint::token_program = token_program)]
-    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub token_mint_a: Box<InterfaceAccount<'info, Mint>>,  
     
     #[account(mint::token_program = token_program)]
-    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub token_mint_b: Box<InterfaceAccount<'info, Mint>>,  
 
     #[account(
         init,
@@ -95,7 +95,7 @@ pub struct InitializePool<'info> {
         seeds = [b"pool_state", token_mint_a.key().as_ref(), token_mint_b.key().as_ref()],
         bump,
     )]
-    pub pool_state: Box<Account<'info, PoolState>>,  // ✅ BOX
+    pub pool_state: Box<Account<'info, PoolState>>,  
 
     /// CHECK: PDA authority derived from pool_state, used as signer for vault operations
     #[account(
@@ -109,11 +109,11 @@ pub struct InitializePool<'info> {
         payer = payer,
         seeds = [b"pool_mint", pool_state.key().as_ref()],
         bump,
-        mint::decimals = 9,
+        mint::decimals = 6,
         mint::authority = pool_authority,
         mint::token_program = token_program,
     )]
-    pub pool_mint: Box<InterfaceAccount<'info, Mint>>,  // ✅ BOX
+    pub pool_mint: Box<InterfaceAccount<'info, Mint>>,  
 
     #[account(
         init,
@@ -122,7 +122,7 @@ pub struct InitializePool<'info> {
         associated_token::authority = pool_authority,
         associated_token::token_program = token_program,
     )]
-    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_a: Box<InterfaceAccount<'info, TokenAccount>>,  
 
     #[account(
         init,
@@ -131,7 +131,7 @@ pub struct InitializePool<'info> {
         associated_token::authority = pool_authority,
         associated_token::token_program = token_program,
     )]
-    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  // ✅ BOX
+    pub vault_b: Box<InterfaceAccount<'info, TokenAccount>>,  
 
     pub system_program: Program<'info, System>,
     pub token_program: Interface<'info, TokenInterface>,

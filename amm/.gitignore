@@ -1,7 +1,38 @@
+# Anchor
 .anchor
-.DS_Store
-target
+target/
 **/*.rs.bk
-node_modules
-test-ledger
-.yarn
+
+# Solana
+test-ledger/
+.validator-keypair.json
+keys/
+
+# Node
+node_modules/
+dist/
+.yarn/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+validator-*.log
+
+# Build artifacts
+*.so
+*.dylib
+*.dll
+
+# Environment
+.env
+.env.local
